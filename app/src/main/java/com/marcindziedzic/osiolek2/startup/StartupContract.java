@@ -1,22 +1,19 @@
 package com.marcindziedzic.osiolek2.startup;
 
+import java.util.ArrayList;
+
 public interface StartupContract {
 
     interface View {
 
-        /**
-         * Testing purposes. Give feedback after ping() was called.
-         */
-        void pingCallback();
-
+        void fillListOfPreviousTrustedIPs(ArrayList<String> previousTrustedIPs);
     }
 
     interface Presenter {
 
-        /**
-         * It's just for testing purposes. It sends ping request.
-         */
-        void ping();
+        void initListOfPreviousTrustedIPs();
+
+        void createNewNet();
 
     }
 

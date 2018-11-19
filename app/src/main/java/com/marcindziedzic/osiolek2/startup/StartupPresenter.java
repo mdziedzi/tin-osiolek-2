@@ -1,5 +1,7 @@
 package com.marcindziedzic.osiolek2.startup;
 
+import com.marcindziedzic.osiolek2.util.FSUtil;
+
 import tin.p2p.controller.Controller;
 import tin.p2p.controller.ControllerGUIInterface;
 
@@ -19,14 +21,17 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
     }
 
     @Override
-    public void ping() {
-        backend.ping();
+    public void initListOfPreviousTrustedIPs() {
+        view.fillListOfPreviousTrustedIPs(FSUtil.getPreviousTrustedIPs());
+    }
 
+    @Override
+    public void createNewNet() {
+        // todo
     }
 
     @Override
     public void pingCallback() {
-        view.pingCallback();
+        // todo: delete
     }
-
 }
