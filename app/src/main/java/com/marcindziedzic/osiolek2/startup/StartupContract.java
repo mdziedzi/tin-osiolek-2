@@ -15,6 +15,7 @@ public interface StartupContract {
 
         void createNewNet();
 
+        void connectToNetByIP(String ip);
     }
 
 }

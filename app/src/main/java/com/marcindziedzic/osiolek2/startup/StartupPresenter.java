@@ -27,11 +27,36 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
 
     @Override
     public void createNewNet() {
+        backend.createNewNet();
+    }
+
+    @Override
+    public void connectToNetByIP(String ip) {
+        backend.connectToNetByIP(ip);
+    }
+
+    @Override
+    public void onCreateNewNetSuccess() {
         // todo
     }
 
     @Override
-    public void pingCallback() {
-        // todo: delete
+    public void onCreateNewNetFailure() {
+        // todo
+    }
+
+    @Override
+    public void onConnectToNetByIPSucces() {
+        // todo
+    }
+
+    @Override
+    public void onConnectToNetByIPReject() {
+        // todo
+    }
+
+    @Override
+    public void onConnectToNetByIPFailure() {
+        // todo
     }
 }
