@@ -1,5 +1,6 @@
 package com.marcindziedzic.osiolek2.startup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.marcindziedzic.osiolek2.R;
+import com.marcindziedzic.osiolek2.connectToNet.ConnectToNetActivity;
+import com.marcindziedzic.osiolek2.createNewNet.CreateNewNetActivity;
 
 import java.util.ArrayList;
 
@@ -23,10 +26,13 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     private ArrayAdapter<String> adapter;
 
     private Button createNewNetButton;
+
     private View.OnClickListener createNewNetListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             presenter.createNewNet();
+
+            startCreateNewNetActivity();
 
         }
     };
@@ -36,8 +42,19 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String ip = (String) parent.getItemAtPosition(position);
             presenter.connectToNetByIP(ip);
+            startConnectToNetActivity();
         }
     };
+
+    private void startCreateNewNetActivity() {
+        Intent intent = new Intent(MainActivity.this, CreateNewNetActivity.class);
+        startActivity(intent);
+    }
+
+    private void startConnectToNetActivity() {
+        Intent intent = new Intent(MainActivity.this, ConnectToNetActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
