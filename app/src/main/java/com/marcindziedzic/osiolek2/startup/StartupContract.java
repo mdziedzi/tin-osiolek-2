@@ -7,6 +7,16 @@ public interface StartupContract {
     interface View {
 
         void fillListOfPreviousTrustedIPs(ArrayList<String> previousTrustedIPs);
+
+        void goToCreateNewNetActivity();
+
+        void showCreateNewNetError();
+
+        void goToConnectToNetActivity();
+
+        void showConnectToNetRejection();
+
+        void showConnectToNetFailure();
     }
 
     interface Presenter {

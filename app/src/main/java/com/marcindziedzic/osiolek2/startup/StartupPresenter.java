@@ -27,36 +27,41 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
 
     @Override
     public void createNewNet() {
-        backend.createNewNet();
+        backend.createNewNet(new CreateNewNetCallback() {
+            @Override
+            public void onCreateNewNetSuccess() {
+                view.goToCreateNewNetActivity();
+
+            }
+
+            @Override
+            public void onCreateNewNetFailure() {
+                view.showCreateNewNetError();
+
+            }
+        });
     }
 
     @Override
     public void connectToNetByIP(String ip) {
-        backend.connectToNetByIP(ip);
+        backend.connectToNetByIP(ip, new ConnectToNetByIPCallback() {
+            @Override
+            public void onConnectToNetByIPSucces() {
+                view.goToConnectToNetActivity();
+            }
+
+            @Override
+            public void onConnectToNetByIPReject() {
+                view.showConnectToNetRejection();
+            }
+
+            @Override
+            public void onConnectToNetByIPFailure() {
+                view.showConnectToNetFailure();
+
+            }
+        });
     }
 
-    @Override
-    public void onCreateNewNetSuccess() {
-        // todo
-    }
 
-    @Override
-    public void onCreateNewNetFailure() {
-        // todo
-    }
-
-    @Override
-    public void onConnectToNetByIPSucces() {
-        // todo
-    }
-
-    @Override
-    public void onConnectToNetByIPReject() {
-        // todo
-    }
-
-    @Override
-    public void onConnectToNetByIPFailure() {
-        // todo
-    }
 }

@@ -32,19 +32,18 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         public void onClick(View v) {
             presenter.createNewNet();
 
-            startCreateNewNetActivity();
-
         }
     };
+
 
     private AdapterView.OnItemClickListener listListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String ip = (String) parent.getItemAtPosition(position);
             presenter.connectToNetByIP(ip);
-            startConnectToNetActivity();
         }
     };
+
 
     private void startCreateNewNetActivity() {
         Intent intent = new Intent(MainActivity.this, CreateNewNetActivity.class);
@@ -87,6 +86,32 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     public void fillListOfPreviousTrustedIPs(ArrayList<String> previousTrustedIPs) {
         adapter = new ArrayAdapter<>(this, R.layout.ip_list_row, R.id.ipTextView, previousTrustedIPs);
         list.setAdapter(adapter);
+    }
+
+    @Override
+    public void goToCreateNewNetActivity() {
+        startCreateNewNetActivity();
+
+    }
+
+    @Override
+    public void showCreateNewNetError() {
+        //todo
+    }
+
+    @Override
+    public void goToConnectToNetActivity() {
+        startConnectToNetActivity();
+    }
+
+    @Override
+    public void showConnectToNetRejection() {
+        //todo
+    }
+
+    @Override
+    public void showConnectToNetFailure() {
+        //todo
     }
 
 }

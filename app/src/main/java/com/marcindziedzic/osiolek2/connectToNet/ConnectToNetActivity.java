@@ -8,12 +8,20 @@ import android.view.MenuItem;
 
 import com.marcindziedzic.osiolek2.R;
 
-public class ConnectToNetActivity extends AppCompatActivity {
+public class ConnectToNetActivity extends AppCompatActivity implements ConnectToNetContract.View {
+
+    private ConnectToNetContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect_to_net);
+
+        initPresenter();
+    }
+
+    private void initPresenter() {
+        this.presenter = new ConnectToNetPresenter(this);
     }
 
     @Override
@@ -26,6 +34,18 @@ public class ConnectToNetActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // case jesli bedzie ich wiecej
+
+        presenter.disconnectFromNet();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showDisconnectSuccessfully() {
+        //todo
+    }
+
+    @Override
+    public void showDisconnectFailure() {
+        //todo
     }
 }
