@@ -1,7 +1,8 @@
 package com.marcindziedzic.osiolek2.connectToNet;
 
-import tin.p2p.controller.Controller;
-import tin.p2p.controller.ControllerGUIInterface;
+
+import tin.p2p.controller_layer.Controller;
+import tin.p2p.controller_layer.ControllerGUIInterface;
 
 public class ConnectToNetPresenter implements ConnectToNetContract.Presenter {
 

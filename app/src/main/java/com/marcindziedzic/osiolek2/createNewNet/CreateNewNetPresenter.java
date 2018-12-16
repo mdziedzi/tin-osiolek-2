@@ -1,7 +1,8 @@
 package com.marcindziedzic.osiolek2.createNewNet;
 
-import tin.p2p.controller.Controller;
-import tin.p2p.controller.ControllerGUIInterface;
+
+import tin.p2p.controller_layer.Controller;
+import tin.p2p.controller_layer.ControllerGUIInterface;
 
 public class CreateNewNetPresenter implements CreateNewNetContract.Presenter {
 

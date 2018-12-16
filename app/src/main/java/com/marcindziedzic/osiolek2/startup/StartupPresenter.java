@@ -2,8 +2,9 @@ package com.marcindziedzic.osiolek2.startup;
 
 import com.marcindziedzic.osiolek2.util.FSUtil;
 
-import tin.p2p.controller.Controller;
-import tin.p2p.controller.ControllerGUIInterface;
+import tin.p2p.controller_layer.Controller;
+import tin.p2p.controller_layer.ControllerGUIInterface;
+
 
 public class StartupPresenter implements StartupContract.Presenter, ControllerGUIInterface {
 
@@ -43,8 +44,9 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
     }
 
     @Override
-    public void connectToNetByIP(String ip) {
-        backend.connectToNetByIP(ip, new ConnectToNetByIPCallback() {
+    public void connectToNetByIP(String ip) { // todo to ma przyjmować jeszcze haslo
+
+        backend.connectToNetByIP(ip, "aaa", new ConnectToNetByIPCallback() {
             @Override
             public void onConnectToNetByIPSucces() {
                 view.goToConnectToNetActivity();
@@ -58,6 +60,11 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
             @Override
             public void onConnectToNetByIPFailure() {
                 view.showConnectToNetFailure();
+
+            }
+
+            @Override
+            public void onIPFormatFailure() {
 
             }
         });

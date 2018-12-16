@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
     @Override
     public void showConnectToNetFailure() {
+        System.out.println("teeeeeest");
         //todo
     }
 
