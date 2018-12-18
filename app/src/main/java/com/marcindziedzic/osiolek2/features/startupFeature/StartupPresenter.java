@@ -1,6 +1,6 @@
-package com.marcindziedzic.osiolek2.startup;
+package com.marcindziedzic.osiolek2.features.startupFeature;
 
-import com.marcindziedzic.osiolek2.util.FSUtil;
+import com.marcindziedzic.osiolek2.utils.FSUtil;
 
 import tin.p2p.controller_layer.Controller;
 import tin.p2p.controller_layer.ControllerGUIInterface;
@@ -27,8 +27,8 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
     }
 
     @Override
-    public void createNewNet() {
-        backend.createNewNet(new CreateNewNetCallback() {
+    public void createNewNet(String password) {
+        backend.createNewNet(password, new CreateNewNetCallback() {
             @Override
             public void onCreateNewNetSuccess() {
                 view.goToCreateNewNetActivity();

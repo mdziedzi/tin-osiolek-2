@@ -1,4 +1,4 @@
-package com.marcindziedzic.osiolek2.connectToNet;
+package com.marcindziedzic.osiolek2.features.connectToNetFeature;
 
 
 import tin.p2p.controller_layer.Controller;

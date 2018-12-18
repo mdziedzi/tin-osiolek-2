@@ -1,4 +1,4 @@
-package com.marcindziedzic.osiolek2.connectToNet;
+package com.marcindziedzic.osiolek2.features.connectToNetFeature;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

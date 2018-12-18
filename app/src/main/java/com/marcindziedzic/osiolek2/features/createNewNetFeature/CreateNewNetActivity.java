@@ -1,4 +1,4 @@
-package com.marcindziedzic.osiolek2.createNewNet;
+package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.marcindziedzic.osiolek2.startup;
+package com.marcindziedzic.osiolek2.features.startupFeature;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public interface StartupContract {
 
         void initListOfPreviousTrustedIPs();
 
-        void createNewNet();
+        void createNewNet(String password);
 
         void connectToNetByIP(String ip);
     }

@@ -1,4 +1,4 @@
-package com.marcindziedzic.osiolek2.createNewNet;
+package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 
 
 import tin.p2p.controller_layer.Controller;

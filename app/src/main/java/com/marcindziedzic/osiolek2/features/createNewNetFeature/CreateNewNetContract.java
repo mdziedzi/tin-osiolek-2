@@ -1,6 +1,6 @@
-package com.marcindziedzic.osiolek2.connectToNet;
+package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 
-public interface ConnectToNetContract {
+public interface CreateNewNetContract {
 
     interface View {
         void showDisconnectSuccessfully();
@@ -9,7 +9,9 @@ public interface ConnectToNetContract {
     }
 
     interface Presenter {
+
         void disconnectFromNet();
     }
+
 
 }
