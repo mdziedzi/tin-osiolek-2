@@ -21,8 +21,7 @@
         </activity>
         <activity android:name=".features.createNewNetFeature.CreateNewNetActivity" />
         <activity android:name=".features.connectToNetFeature.ConnectToNetActivity" />
-        <activity android:name=".features.showAllRemoteFiles.ShowAllRemoteFilesActivity"></activity>
+        <activity android:name=".features.showAllRemoteFiles.ShowAllRemoteFilesActivity" />
     </application>
-
 
 </manifest>

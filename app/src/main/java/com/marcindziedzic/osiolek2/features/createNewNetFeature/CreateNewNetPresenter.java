@@ -1,9 +1,13 @@
 package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 
 
+import java.util.ArrayList;
+
+import tin.p2p.controller_layer.ControllerGUIInterface;
 import tin.p2p.controller_layer.FrameworkController;
 
-public class CreateNewNetPresenter implements CreateNewNetContract.Presenter {
+public class CreateNewNetPresenter implements CreateNewNetContract.Presenter,
+        ControllerGUIInterface.ListOfNodesViewer {
 
     private final CreateNewNetContract.View view;
 
@@ -31,4 +35,8 @@ public class CreateNewNetPresenter implements CreateNewNetContract.Presenter {
     }
 
 
+    @Override
+    public void onListOfNodesUpdated(ArrayList<String> arrayList) {
+        view.showUpdatedListOfNodes(arrayList);
+    }
 }

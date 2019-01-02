@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     }
 
     private void initViews() {
-        listOfPreviouslyTrustedIPsLabel = findViewById(R.id.listOfPreviouslyTrustedIPsLabel);
+        listOfPreviouslyTrustedIPsLabel = findViewById(R.id.listOfRemoteNodesLabel);
 
         list = findViewById(R.id.ipListListView);
         list.setOnItemClickListener(listListener);
@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
     @Override
     public void goToCreateNewNetActivity() {
+        Toast.makeText(this, "Network has been created successfully", Toast.LENGTH_LONG).show();
         startCreateNewNetActivity();
-
     }
 
     @Override
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         // User touched the dialog's positive button
         System.out.println("positive");
         EditText passwordField = Objects.requireNonNull(dialog.getDialog()).findViewById(R.id.password);
-        Toast.makeText(this, "Pass is set as: " + passwordField.getText().toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Pass is set as: " + passwordField.getText().toString(), Toast.LENGTH_SHORT).show();
         presenter.createNewNet(passwordField.getText().toString());
     }
 
