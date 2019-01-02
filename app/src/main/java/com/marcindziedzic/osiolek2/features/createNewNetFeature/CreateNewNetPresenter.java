@@ -1,14 +1,13 @@
 package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 
 
-import tin.p2p.controller_layer.Controller;
-import tin.p2p.controller_layer.ControllerGUIInterface;
+import tin.p2p.controller_layer.FrameworkController;
 
 public class CreateNewNetPresenter implements CreateNewNetContract.Presenter {
 
     private final CreateNewNetContract.View view;
 
-    private Controller backend;
+    private FrameworkController backend;
 
     CreateNewNetPresenter(CreateNewNetContract.View createNewNetActivity) {
         this.view = createNewNetActivity;
@@ -16,19 +15,19 @@ public class CreateNewNetPresenter implements CreateNewNetContract.Presenter {
 
     @Override
     public void disconnectFromNet() {
-        backend.disconnectFromNet(new ControllerGUIInterface.DisconnectCallback() {
-            @Override
-            public void onDisconnectSuccess() {
-                view.showDisconnectSuccessfully();
-
-            }
-
-            @Override
-            public void onDisconnectFailure() {
-                view.showDisconnectFailure();
-
-            }
-        });
+//        backend.disconnectFromNet(new ControllerGUIInterface.DisconnectCallback() {
+//            @Override
+//            public void onDisconnectSuccess() {
+//                view.showDisconnectSuccessfully();
+//
+//            }
+//
+//            @Override
+//            public void onDisconnectFailure() {
+//                view.showDisconnectFailure();
+//
+//            }
+//        });
     }
 
 

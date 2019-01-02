@@ -2,15 +2,15 @@ package com.marcindziedzic.osiolek2.features.startupFeature;
 
 import com.marcindziedzic.osiolek2.utils.FSUtil;
 
-import tin.p2p.controller_layer.Controller;
 import tin.p2p.controller_layer.ControllerGUIInterface;
+import tin.p2p.controller_layer.FrameworkController;
 
 
 public class StartupPresenter implements StartupContract.Presenter, ControllerGUIInterface {
 
     private StartupContract.View view;
 
-    private Controller backend;
+    private FrameworkController backend;
 
     StartupPresenter(StartupContract.View view) {
         this.view = view;
@@ -18,7 +18,8 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
     }
 
     private void initBackend() {
-        backend = Controller.getInstance(this);
+//        backend = FrameworkController.getInstance(this);
+        backend = FrameworkController.getInstance();
     }
 
     @Override
@@ -46,7 +47,7 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
     @Override
     public void connectToNetByIP(String ip) { // todo to ma przyjmować jeszcze haslo
 
-        backend.connectToNetByIP(ip, "aaa", new ConnectToNetByIPCallback() {
+        backend.connectToNetByIP(ip, "qqq", new ConnectToNetByIPCallback() {
             @Override
             public void onConnectToNetByIPSucces() {
                 view.goToConnectToNetActivity();

@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".features.createNewNetFeature.CreateNewNetActivity" />
-        <activity android:name=".features.connectToNetFeature.ConnectToNetActivity"></activity>
+        <activity android:name=".features.connectToNetFeature.ConnectToNetActivity" />
+        <activity android:name=".features.showAllRemoteFiles.ShowAllRemoteFilesActivity"></activity>
     </application>
+
 
 </manifest>

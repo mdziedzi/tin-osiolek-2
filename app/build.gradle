@@ -30,5 +30,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation files('/Users/marcin/IdeaProjects/P2P-file-sharing-TIN/P2P-Java-desktop/backend/target/backend-1.0.jar')
+    implementation files('/Users/marcin/IdeaProjects/P2P-file-sharing-TIN/P2P-Java-desktop/framework/target/framework-1.0.jar')
 }
