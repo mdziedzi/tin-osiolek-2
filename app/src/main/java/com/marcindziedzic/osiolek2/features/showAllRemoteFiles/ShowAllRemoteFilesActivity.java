@@ -2,12 +2,13 @@ package com.marcindziedzic.osiolek2.features.showAllRemoteFiles;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.marcindziedzic.osiolek2.R;
@@ -21,8 +22,9 @@ public class ShowAllRemoteFilesActivity extends AppCompatActivity implements Sho
 
     private ListView listOfAllRemoteFiles;
     private ShowAllRemoteFilesContract.Presenter presenter;
-    private Button refreshButton;
+    private FloatingActionButton refreshButton;
     private ArrayAdapter adapter;
+    private SwipeRefreshLayout swipeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,19 @@ public class ShowAllRemoteFilesActivity extends AppCompatActivity implements Sho
         listOfAllRemoteFiles = findViewById(R.id.listOfAllRemoteFilesListView);
         refreshButton = findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(v -> presenter.refreshFileList());
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.filesSwipeRefresh);
+        swipeLayout.setOnRefreshListener(() -> presenter.refreshFileList());
     }
 
     @Override
     public void showListOfFilesInNet(List<String[]> filesInfo) {
         adapter = new FileListViewAdapter(this, R.layout.file_row_layout, (ArrayList<String[]>) filesInfo);
         listOfAllRemoteFiles.setAdapter(adapter);
+
+        if (swipeLayout.isRefreshing()) {
+            swipeLayout.setRefreshing(false);
+        }
     }
 
     @Override
