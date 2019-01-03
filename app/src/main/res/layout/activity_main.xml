@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/listOfRemoteNodesLabel"
+        android:id="@+id/listOfAllRemoteFilesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -38,6 +38,6 @@
         app:layout_constraintBottom_toTopOf="@+id/createNewNetButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listOfRemoteNodesLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/listOfAllRemoteFilesLabel" />
 
 </android.support.constraint.ConstraintLayout>

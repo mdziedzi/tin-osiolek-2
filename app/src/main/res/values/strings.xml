@@ -13,4 +13,5 @@
     <string name="cancel">Cancel</string>
     <string name="podaj_haslo_nowa_siec">Ustaw haslo w nowej sieci</string>
     <string name="list_of_remote_nodes">List of remote nodes</string>
+    <string name="list_of_all_remote_files">List of all remote files</string>
 </resources>

@@ -15,6 +15,8 @@ public class CreateNewNetPresenter implements CreateNewNetContract.Presenter,
 
     CreateNewNetPresenter(CreateNewNetContract.View createNewNetActivity) {
         this.view = createNewNetActivity;
+        backend = FrameworkController.getInstance();
+        backend.registerListOfNodesViewer(this);
     }
 
     @Override

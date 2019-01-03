@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     }
 
     private void initViews() {
-        listOfPreviouslyTrustedIPsLabel = findViewById(R.id.listOfRemoteNodesLabel);
+        listOfPreviouslyTrustedIPsLabel = findViewById(R.id.listOfAllRemoteFilesLabel);
 
         list = findViewById(R.id.ipListListView);
         list.setOnItemClickListener(listListener);
