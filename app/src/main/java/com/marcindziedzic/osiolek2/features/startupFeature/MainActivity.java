@@ -94,6 +94,13 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
         list = findViewById(R.id.ipListListView);
         list.setOnItemClickListener(listListener);
+        list.setOnItemLongClickListener((parent, view, position, id) -> {
+            String ip = (String) parent.getItemAtPosition(position);
+            listOfIps.removeIf(s -> s.equals(ip));
+            saveIpsToSharedPrefs(MainActivity.this);
+            fillListOfPreviousTrustedIPs(listOfIps);
+            return true;
+        });
         presenter.initListOfPreviousTrustedIPs();
 
         createNewNetButton = findViewById(R.id.createNewNetButton);
@@ -129,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     @Override
     public void fillListOfPreviousTrustedIPs(ArrayList<String> previousTrustedIPs) {
 //        adapter = new ArrayAdapter<>(this, R.layout.ip_list_row, R.id.ipTextView, previousTrustedIPs);
-        listOfIps = (ArrayList<String>) getTasksFromSharedPrefs(this);
+        listOfIps = (ArrayList<String>) getIpsFromSharedPrefs(this);
         if (listOfIps == null) {
             listOfIps = new ArrayList<>();
         }
@@ -192,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         prefsEditor.apply();
     }
 
-    public List<String> getTasksFromSharedPrefs(Context context) {
+    public List<String> getIpsFromSharedPrefs(Context context) {
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context
                 .getApplicationContext());
         Gson gson = new Gson();
