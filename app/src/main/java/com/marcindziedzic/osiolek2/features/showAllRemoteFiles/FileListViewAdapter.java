@@ -38,8 +38,8 @@ public class FileListViewAdapter extends ArrayAdapter<String[]> {
         TextView fileOwner = (TextView) rowView.findViewById(R.id.fileOwner);
 
         fileName.setText(objects.get(position)[0]);
-        fileSize.setText(objects.get(position)[0]);
-        fileOwner.setText(objects.get(position)[0]);
+        fileSize.setText(objects.get(position)[1]);
+        fileOwner.setText(objects.get(position)[2]);
 
         return rowView;
     }

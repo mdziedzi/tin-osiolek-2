@@ -1,6 +1,6 @@
 package com.marcindziedzic.osiolek2.features.startupFeature;
 
-import com.marcindziedzic.osiolek2.utils.FSUtil;
+import com.marcindziedzic.osiolek2.utils.MockFactory;
 
 import tin.p2p.controller_layer.ControllerGUIInterface;
 import tin.p2p.controller_layer.FrameworkController;
@@ -24,7 +24,7 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
 
     @Override
     public void initListOfPreviousTrustedIPs() {
-        view.fillListOfPreviousTrustedIPs(FSUtil.getPreviousTrustedIPs());
+        view.fillListOfPreviousTrustedIPs(MockFactory.getPreviousTrustedIPs());
     }
 
     @Override

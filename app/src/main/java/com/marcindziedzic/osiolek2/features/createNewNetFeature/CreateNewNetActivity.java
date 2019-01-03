@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.marcindziedzic.osiolek2.R;
 import com.marcindziedzic.osiolek2.features.showAllRemoteFiles.ShowAllRemoteFilesActivity;
 import com.marcindziedzic.osiolek2.features.startupFeature.MainActivity;
+import com.marcindziedzic.osiolek2.utils.MockFactory;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,9 @@ public class CreateNewNetActivity extends AppCompatActivity implements CreateNew
         initPresenter();
 
         initViews();
+
+        //todo: delete
+        showUpdatedListOfNodes(MockFactory.getListOfNodes());
     }
 
     private void initViews() {
