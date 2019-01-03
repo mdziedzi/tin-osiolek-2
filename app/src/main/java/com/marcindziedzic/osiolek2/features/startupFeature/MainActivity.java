@@ -1,8 +1,13 @@
 package com.marcindziedzic.osiolek2.features.startupFeature;
 
+import android.Manifest;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,12 +18,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.marcindziedzic.osiolek2.R;
 import com.marcindziedzic.osiolek2.features.createNewNetFeature.CreateNewNetActivity;
 import com.marcindziedzic.osiolek2.features.showAllRemoteFiles.ShowAllRemoteFilesActivity;
 import com.marcindziedzic.osiolek2.reusableFragments.PasswordDialog;
+import com.marcindziedzic.osiolek2.utils.FSUtil;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements StartupContract.View, PasswordDialog.NoticeDialogListener {
@@ -42,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
             presenter.connectToNetByIP(ip);
         }
     };
-
+    private ArrayList<String> listOfIps;
 
     private void startCreateNewNetActivity() {
         Intent intent = new Intent(MainActivity.this, CreateNewNetActivity.class);
@@ -63,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
         initViews();
 
+        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission
+                .READ_EXTERNAL_STORAGE};
+        requestPermissions(permissions, 0);
+
+
     }
 
     private void initPresenter() {
@@ -79,6 +94,23 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         createNewNetButton = findViewById(R.id.createNewNetButton);
         createNewNetButton.setOnClickListener(createNewNetListener);
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 0:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Granted.
+                    FSUtil.initializeAppDirectory();
+                    FSUtil.getFilesFromLocalDirectory(new File("/storage/emulated/0/Download/osiolek/"), new
+                            ArrayList<File>(10));
+                } else {
+                    //Denied.
+                    Toast.makeText(this, "No permission for storage", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
     }
 
     @Override
@@ -131,5 +163,24 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         //do nothing
+    }
+
+    private void saveIpsToSharedPrefs(Context context) {
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listOfIps); //tasks is an ArrayList instance variable
+        prefsEditor.putString("listOfIps", json);
+        prefsEditor.apply();
+    }
+
+    public List<String> getTasksFromSharedPrefs(Context context) {
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context
+                .getApplicationContext());
+        Gson gson = new Gson();
+        String json = appSharedPrefs.getString("listOfIps", "");
+        listOfIps = gson.fromJson(json, new TypeToken<ArrayList<String>>() {
+        }.getType());
+        return listOfIps;
     }
 }
