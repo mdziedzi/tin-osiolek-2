@@ -8,11 +8,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements StartupContract.View, PasswordDialog.NoticeDialogListener {
+public class MainActivity extends AppCompatActivity implements StartupContract.View,
+        PasswordDialog.NoticeDialogListener, AddIpDialog.AddIpDialogListener {
 
     private StartupContract.Presenter presenter;
 
@@ -40,7 +41,11 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     private ListView list;
     private ArrayAdapter<String> adapter;
 
-    private Button createNewNetButton;
+    private FloatingActionButton createNewNetButton;
+
+    private ArrayList<String> listOfIps;
+
+    private FloatingActionButton addNewIpButton;
 
     private View.OnClickListener createNewNetListener = v -> showPasswordDialog();
 
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
             presenter.connectToNetByIP(ip);
         }
     };
-    private ArrayList<String> listOfIps;
+
 
     private void startCreateNewNetActivity() {
         Intent intent = new Intent(MainActivity.this, CreateNewNetActivity.class);
@@ -94,6 +99,14 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         createNewNetButton = findViewById(R.id.createNewNetButton);
         createNewNetButton.setOnClickListener(createNewNetListener);
 
+        addNewIpButton = findViewById(R.id.floatingActionButton);
+        addNewIpButton.setOnClickListener(v -> showAddIpDialog());
+
+    }
+
+    private void showAddIpDialog() {
+        DialogFragment dialog = new AddIpDialog();
+        dialog.show(getFragmentManager(), "AddIpDialogFragment");
     }
 
     @Override
@@ -115,7 +128,12 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
     @Override
     public void fillListOfPreviousTrustedIPs(ArrayList<String> previousTrustedIPs) {
-        adapter = new ArrayAdapter<>(this, R.layout.ip_list_row, R.id.ipTextView, previousTrustedIPs);
+//        adapter = new ArrayAdapter<>(this, R.layout.ip_list_row, R.id.ipTextView, previousTrustedIPs);
+        listOfIps = (ArrayList<String>) getTasksFromSharedPrefs(this);
+        if (listOfIps == null) {
+            listOfIps = new ArrayList<>();
+        }
+        adapter = new ArrayAdapter<>(this, R.layout.ip_list_row, R.id.ipTextView, listOfIps);
         list.setAdapter(adapter);
     }
 
@@ -182,5 +200,18 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         listOfIps = gson.fromJson(json, new TypeToken<ArrayList<String>>() {
         }.getType());
         return listOfIps;
+    }
+
+
+    @Override
+    public void onIpDialogPositiveClick(DialogFragment dialog) {
+        EditText newIp = Objects.requireNonNull(dialog.getDialog()).findViewById(R.id.ipNumberTextEdit);
+        listOfIps.add(newIp.getText().toString());
+        saveIpsToSharedPrefs(this);
+    }
+
+    @Override
+    public void onIpDialogNegativeClick(DialogFragment dialog) {
+        // do nothing
     }
 }
