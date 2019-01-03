@@ -10,6 +10,8 @@ public class ShowAllRemoteFilesContract {
 
     interface Presenter {
         void refreshFileList();
+
+        void disconnectFromNet();
     }
 
 }

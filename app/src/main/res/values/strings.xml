@@ -2,7 +2,7 @@
     <string name="app_name">Osiolek 2.0</string>
     <string name="textview">TextView</string>
     <string name="stworz_nowa_siec">Stwórz nową sieć</string>
-    <string name="lista_poprzednich_zaufanych_numerow_ip">Lista poprzednich zaufanych numerów IP</string>
+    <string name="lista_poprzednich_zaufanych_numerow_ip">Poprzednio zaufane numery IP</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -12,6 +12,6 @@
     <string name="signin">OK</string>
     <string name="cancel">Cancel</string>
     <string name="podaj_haslo_nowa_siec">Ustaw haslo w nowej sieci</string>
-    <string name="list_of_remote_nodes">List of remote nodes</string>
-    <string name="list_of_all_remote_files">List of all remote files</string>
+    <string name="list_of_remote_nodes">Użytkownicy w sieci</string>
+    <string name="list_of_all_remote_files">Pliki w sieci</string>
 </resources>

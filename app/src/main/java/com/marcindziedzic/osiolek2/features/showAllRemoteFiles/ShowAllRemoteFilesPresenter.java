@@ -25,4 +25,9 @@ public class ShowAllRemoteFilesPresenter implements ShowAllRemoteFilesContract.P
             }
         });
     }
+
+    @Override
+    public void disconnectFromNet() {
+        //todo
+    }
 }

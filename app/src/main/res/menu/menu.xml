@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/listOfAllRemoteFilesMenuItem"
+        android:title="Dostępne pliki" />
+    <item
+        android:id="@+id/listOfRemoteNodesMenuItem"
+        android:title="Użytkownicy w sieci" />
+    <item
         android:id="@+id/disconnectMenuItem"
         android:icon="@android:drawable/btn_dialog"
         android:title="@string/disconnect_from_net_label" />

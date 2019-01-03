@@ -1,5 +1,6 @@
 package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.marcindziedzic.osiolek2.R;
+import com.marcindziedzic.osiolek2.features.showAllRemoteFiles.ShowAllRemoteFilesActivity;
+import com.marcindziedzic.osiolek2.features.startupFeature.MainActivity;
 
 import java.util.ArrayList;
 
@@ -49,8 +52,18 @@ public class CreateNewNetActivity extends AppCompatActivity implements CreateNew
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // case jesli bedzie ich wiecej
-
-        presenter.disconnectFromNet();
+        switch (item.getItemId()) {
+            case R.id.listOfAllRemoteFilesMenuItem:
+                startActivity(new Intent(this, ShowAllRemoteFilesActivity.class));
+                break;
+            case R.id.listOfRemoteNodesMenuItem:
+                startActivity(new Intent(this, CreateNewNetActivity.class));
+                break;
+            case R.id.disconnectMenuItem:
+                presenter.disconnectFromNet();
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 

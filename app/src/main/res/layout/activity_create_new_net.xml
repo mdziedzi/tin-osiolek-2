@@ -11,8 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/list_of_remote_nodes"
-        android:textSize="18sp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/remoteNodesListView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

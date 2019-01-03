@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.marcindziedzic.osiolek2.R;
-import com.marcindziedzic.osiolek2.features.connectToNetFeature.ConnectToNetActivity;
 import com.marcindziedzic.osiolek2.features.createNewNetFeature.CreateNewNetActivity;
+import com.marcindziedzic.osiolek2.features.showAllRemoteFiles.ShowAllRemoteFilesActivity;
 import com.marcindziedzic.osiolek2.reusableFragments.PasswordDialog;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     }
 
     private void startConnectToNetActivity() {
-        Intent intent = new Intent(MainActivity.this, ConnectToNetActivity.class);
+        Intent intent = new Intent(MainActivity.this, ShowAllRemoteFilesActivity.class);
         startActivity(intent);
     }
 
