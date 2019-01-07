@@ -45,9 +45,9 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
     }
 
     @Override
-    public void connectToNetByIP(String ip) { // todo to ma przyjmować jeszcze haslo
+    public void connectToNetByIP(String ip, String password) {
 
-        backend.connectToNetByIP(ip, "qqq", new ConnectToNetByIPCallback() {
+        backend.connectToNetByIP(ip, password, new ConnectToNetByIPCallback() {
             @Override
             public void onConnectToNetByIPSucces() {
                 view.goToConnectToNetActivity();
@@ -66,7 +66,7 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
 
             @Override
             public void onIPFormatFailure() {
-
+                view.showIpFormatError();
             }
         });
     }

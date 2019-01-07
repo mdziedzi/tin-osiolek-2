@@ -17,6 +17,8 @@ public interface StartupContract {
         void showConnectToNetRejection();
 
         void showConnectToNetFailure();
+
+        void showIpFormatError();
     }
 
     interface Presenter {
@@ -25,7 +27,7 @@ public interface StartupContract {
 
         void createNewNet(String password);
 
-        void connectToNetByIP(String ip);
+        void connectToNetByIP(String ip, String password);
     }
 
 }

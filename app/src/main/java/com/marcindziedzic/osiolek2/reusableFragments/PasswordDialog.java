@@ -13,8 +13,15 @@ import com.marcindziedzic.osiolek2.features.startupFeature.MainActivity;
 
 public class PasswordDialog extends DialogFragment {
 
+    private final PasswordDialogType type;
     // Use this instance of the interface to deliver action events
     NoticeDialogListener mListener;
+    ConnectToNetDialogListener connectToNetDialogListener;
+
+    public PasswordDialog(PasswordDialogType passwordDialogType) { //todo verify error
+        super();
+        type = passwordDialogType;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -24,10 +31,23 @@ public class PasswordDialog extends DialogFragment {
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.dialog_password_to_net, null))
-                // Add action buttons
-                .setPositiveButton(R.string.signin, (dialog, id) -> mListener.onDialogPositiveClick(PasswordDialog.this))
-                .setNegativeButton(R.string.cancel, (dialog, id) -> mListener.onDialogNegativeClick(PasswordDialog.this));
+        switch (type) {
+            case NEW_NET:
+                builder.setView(inflater.inflate(R.layout.dialog_password_to_net, null))
+                        // Add action buttons
+                        .setPositiveButton(R.string.signin, (dialog, id) -> mListener.onDialogPositiveClick(PasswordDialog.this))
+                        .setNegativeButton(R.string.cancel, (dialog, id) -> mListener.onDialogNegativeClick(PasswordDialog.this));
+                break;
+            case CONNECT_TO_NET:
+                builder.setView(inflater.inflate(R.layout.dialog_password_to_net, null))
+                        // Add action buttons
+                        .setPositiveButton(R.string.signin, (dialog, id) -> connectToNetDialogListener
+                                .onConnectToNetDialogPositiveClick(PasswordDialog.this))
+                        .setNegativeButton(R.string.cancel, (dialog, id) -> connectToNetDialogListener
+                                .onConnectToNetDialogNegativeClick(PasswordDialog.this));
+                break;
+        }
+
         return builder.create();
     }
 
@@ -36,8 +56,15 @@ public class PasswordDialog extends DialogFragment {
         super.onAttach(context);
         // Verify that the host activity implements the callback interface
         try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (NoticeDialogListener) context;
+            switch (type) {
+                case NEW_NET:
+                    // Instantiate the NoticeDialogListener so we can send events to the host
+                    mListener = (NoticeDialogListener) context;
+                    break;
+                case CONNECT_TO_NET:
+                    connectToNetDialogListener = (ConnectToNetDialogListener) context;
+                    break;
+            }
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(MainActivity.class.toString()
@@ -52,5 +79,11 @@ public class PasswordDialog extends DialogFragment {
         void onDialogPositiveClick(DialogFragment dialog);
 
         void onDialogNegativeClick(DialogFragment dialog);
+    }
+
+    public interface ConnectToNetDialogListener {
+        void onConnectToNetDialogPositiveClick(DialogFragment dialogFragment);
+
+        void onConnectToNetDialogNegativeClick(DialogFragment dialogFragment);
     }
 }

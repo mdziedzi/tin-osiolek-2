@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ import com.marcindziedzic.osiolek2.R;
 import com.marcindziedzic.osiolek2.features.createNewNetFeature.CreateNewNetActivity;
 import com.marcindziedzic.osiolek2.features.showAllRemoteFiles.ShowAllRemoteFilesActivity;
 import com.marcindziedzic.osiolek2.reusableFragments.PasswordDialog;
+import com.marcindziedzic.osiolek2.reusableFragments.PasswordDialogType;
 import com.marcindziedzic.osiolek2.utils.FSUtil;
 
 import java.io.File;
@@ -32,7 +34,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements StartupContract.View,
-        PasswordDialog.NoticeDialogListener, AddIpDialog.AddIpDialogListener {
+        PasswordDialog.NoticeDialogListener, AddIpDialog.AddIpDialogListener, PasswordDialog.ConnectToNetDialogListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private StartupContract.Presenter presenter;
 
@@ -47,17 +51,17 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
     private FloatingActionButton addNewIpButton;
 
-    private View.OnClickListener createNewNetListener = v -> showPasswordDialog();
+    private View.OnClickListener createNewNetListener = v -> showPasswordDialog(PasswordDialogType.NEW_NET);
 
+    private String selectedIp;
 
     private AdapterView.OnItemClickListener listListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String ip = (String) parent.getItemAtPosition(position);
-            presenter.connectToNetByIP(ip);
+            selectedIp = (String) parent.getItemAtPosition(position);
+            showPasswordDialog(PasswordDialogType.CONNECT_TO_NET);
         }
     };
-
 
     private void startCreateNewNetActivity() {
         Intent intent = new Intent(MainActivity.this, CreateNewNetActivity.class);
@@ -152,7 +156,8 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
     @Override
     public void showCreateNewNetError() {
-        //todo
+        Log.i(TAG, "showCreateNewNetError: ");
+        Toast.makeText(this, "Error while creating new net.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -162,17 +167,26 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
     @Override
     public void showConnectToNetRejection() {
-        //todo
+        Log.i(TAG, "showConnectToNetRejection: ");
+        Toast.makeText(this, "WRONG PASSWORD", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showConnectToNetFailure() {
-        System.out.println("teeeeeest");
-        //todo
+        Log.e(TAG, "showConnectToNetFailure: ");
+        Toast.makeText(this, "Connect to net FAILURE", Toast.LENGTH_SHORT).show();
     }
 
-    private void showPasswordDialog() {        // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new PasswordDialog();
+    @Override
+    public void showIpFormatError() {
+        Log.i(TAG, "showIpFormatError: ");
+        Toast.makeText(this, "Ip format is bad!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showPasswordDialog(PasswordDialogType passwordDialogType) {        // Create an instance of the
+        // dialog fragment
+        // and show it
+        DialogFragment dialog = new PasswordDialog(passwordDialogType);
         dialog.show(getFragmentManager(), "PasswordDialogFragment");
     }
 
@@ -219,6 +233,18 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
 
     @Override
     public void onIpDialogNegativeClick(DialogFragment dialog) {
+        // do nothing
+    }
+
+    @Override
+    public void onConnectToNetDialogPositiveClick(DialogFragment dialogFragment) {
+        EditText password = Objects.requireNonNull(dialogFragment.getDialog()).findViewById(R.id
+                .password);
+        presenter.connectToNetByIP(selectedIp, password.getText().toString());
+    }
+
+    @Override
+    public void onConnectToNetDialogNegativeClick(DialogFragment dialogFragment) {
         // do nothing
     }
 }
