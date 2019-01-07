@@ -51,12 +51,14 @@ public class ShowAllRemoteFilesActivity extends AppCompatActivity implements Sho
 
     @Override
     public void showListOfFilesInNet(List<String[]> filesInfo) {
-        adapter = new FileListViewAdapter(this, R.layout.file_row_layout, (ArrayList<String[]>) filesInfo);
-        listOfAllRemoteFiles.setAdapter(adapter);
+        runOnUiThread(() -> {
+            adapter = new FileListViewAdapter(this, R.layout.file_row_layout, (ArrayList<String[]>) filesInfo);
+            listOfAllRemoteFiles.setAdapter(adapter);
 
-        if (swipeLayout.isRefreshing()) {
-            swipeLayout.setRefreshing(false);
-        }
+            if (swipeLayout.isRefreshing()) {
+                swipeLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
