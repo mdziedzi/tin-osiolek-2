@@ -2,6 +2,8 @@ package com.marcindziedzic.osiolek2.features.showAllRemoteFiles;
 
 import com.marcindziedzic.osiolek2.utils.MockFactory;
 
+import java.util.stream.Collectors;
+
 import tin.p2p.controller_layer.FrameworkController;
 
 public class ShowAllRemoteFilesPresenter implements ShowAllRemoteFilesContract.Presenter {
@@ -16,17 +18,17 @@ public class ShowAllRemoteFilesPresenter implements ShowAllRemoteFilesContract.P
     @Override
     public void refreshFileList() {
 
-        view.showListOfFilesInNet(MockFactory.getMockedListOfFilesInNet());
+//        view.showListOfFilesInNet(MockFactory.getMockedListOfFilesInNet());
 
-//        backend.getListOfFilesInNet((fileListInfo, owner) -> {
-//            if (fileListInfo != null) {
-//                view.showListOfFilesInNet(
-//                        fileListInfo.stream()
-//                                .map(fileInfo -> new String[]{fileInfo.get(0), fileInfo.get(2), owner})
-//                                .collect(Collectors.toList())
-//                );
-//            }
-//        });
+        backend.getListOfFilesInNet((fileListInfo, owner) -> {
+            if (fileListInfo != null) {
+                view.showListOfFilesInNet(
+                        fileListInfo.stream()
+                                .map(fileInfo -> new String[]{fileInfo.get(0), fileInfo.get(2), owner})
+                                .collect(Collectors.toList())
+                );
+            }
+        });
     }
 
     @Override

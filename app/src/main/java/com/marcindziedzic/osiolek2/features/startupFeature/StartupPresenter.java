@@ -2,6 +2,8 @@ package com.marcindziedzic.osiolek2.features.startupFeature;
 
 import com.marcindziedzic.osiolek2.utils.MockFactory;
 
+import java.io.File;
+
 import tin.p2p.controller_layer.ControllerGUIInterface;
 import tin.p2p.controller_layer.FrameworkController;
 
@@ -29,7 +31,11 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
 
     @Override
     public void createNewNet(String password) {
-        backend.createNewNet(password, new CreateNewNetCallback() {
+        File sdcard = new File("/storage/emulated/0/Download");
+        // to this path add a new directory path
+        File dir = new File(sdcard.getAbsolutePath() + "/osiolek/");
+
+        backend.createNewNet(password, dir, new CreateNewNetCallback() {
             @Override
             public void onCreateNewNetSuccess() {
                 view.goToCreateNewNetActivity();
@@ -46,8 +52,11 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
 
     @Override
     public void connectToNetByIP(String ip, String password) {
+        File sdcard = new File("/storage/emulated/0/Download");
+        // to this path add a new directory path
+        File dir = new File(sdcard.getAbsolutePath() + "/osiolek/");
 
-        backend.connectToNetByIP(ip, password, new ConnectToNetByIPCallback() {
+        backend.connectToNetByIP(ip, password, dir, new ConnectToNetByIPCallback() {
             @Override
             public void onConnectToNetByIPSucces() {
                 view.goToConnectToNetActivity();
