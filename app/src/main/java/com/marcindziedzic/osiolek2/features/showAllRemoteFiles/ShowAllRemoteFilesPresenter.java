@@ -1,7 +1,5 @@
 package com.marcindziedzic.osiolek2.features.showAllRemoteFiles;
 
-import com.marcindziedzic.osiolek2.utils.MockFactory;
-
 import java.util.stream.Collectors;
 
 import tin.p2p.controller_layer.FrameworkController;
@@ -33,6 +31,6 @@ public class ShowAllRemoteFilesPresenter implements ShowAllRemoteFilesContract.P
 
     @Override
     public void disconnectFromNet() {
-        //todo
+        backend.endOfProgram();
     }
 }

@@ -47,6 +47,8 @@ public class ShowAllRemoteFilesActivity extends AppCompatActivity implements Sho
 
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.filesSwipeRefresh);
         swipeLayout.setOnRefreshListener(() -> presenter.refreshFileList());
+
+        adapter = new ArrayAdapter(this, R.layout.file_row_layout);
     }
 
     @Override

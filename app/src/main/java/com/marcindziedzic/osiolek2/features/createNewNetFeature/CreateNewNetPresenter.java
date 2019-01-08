@@ -21,6 +21,7 @@ public class CreateNewNetPresenter implements CreateNewNetContract.Presenter,
 
     @Override
     public void disconnectFromNet() {
+        backend.endOfProgram();
     }
 
 
