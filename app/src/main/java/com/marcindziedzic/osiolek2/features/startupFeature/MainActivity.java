@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -168,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     @Override
     public void showConnectToNetRejection() {
         Log.i(TAG, "showConnectToNetRejection: ");
+        Looper.prepare();
         Toast.makeText(this, "WRONG PASSWORD", Toast.LENGTH_LONG).show();
     }
 
