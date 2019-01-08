@@ -19,6 +19,8 @@ public interface StartupContract {
         void showConnectToNetFailure();
 
         void showIpFormatError();
+
+        void showMainPortUsedError();
     }
 
     interface Presenter {

@@ -21,19 +21,6 @@ public class CreateNewNetPresenter implements CreateNewNetContract.Presenter,
 
     @Override
     public void disconnectFromNet() {
-//        backend.disconnectFromNet(new ControllerGUIInterface.DisconnectCallback() {
-//            @Override
-//            public void onDisconnectSuccess() {
-//                view.showDisconnectSuccessfully();
-//
-//            }
-//
-//            @Override
-//            public void onDisconnectFailure() {
-//                view.showDisconnectFailure();
-//
-//            }
-//        });
     }
 
 

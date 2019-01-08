@@ -54,6 +54,12 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
                 view.showCreateNewNetError();
 
             }
+
+            @Override
+            public void onApplicationMainPortUsed() {
+                Log.d(TAG, "onApplicationMainPortUsed: ");
+                view.showMainPortUsedError();
+            }
         });
     }
 

@@ -185,6 +185,12 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
         runOnUiThread(() -> Toast.makeText(this, "Ip format is bad!", Toast.LENGTH_SHORT).show());
     }
 
+    @Override
+    public void showMainPortUsedError() {
+        Log.d(TAG, "showMainPortUsedError: ");
+        runOnUiThread(() -> Toast.makeText(this, "Main app port is used!", Toast.LENGTH_SHORT).show());
+    }
+
     private void showPasswordDialog(PasswordDialogType passwordDialogType) {        // Create an instance of the
         // dialog fragment
         // and show it
