@@ -1,5 +1,7 @@
 package com.marcindziedzic.osiolek2.features.startupFeature;
 
+import android.util.Log;
+
 import com.marcindziedzic.osiolek2.utils.MockFactory;
 
 import java.io.File;
@@ -9,6 +11,8 @@ import tin.p2p.controller_layer.FrameworkController;
 
 
 public class StartupPresenter implements StartupContract.Presenter, ControllerGUIInterface {
+
+    private static final String TAG = StartupPresenter.class.getSimpleName();
 
     private StartupContract.View view;
 
@@ -31,6 +35,7 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
 
     @Override
     public void createNewNet(String password) {
+        Log.d(TAG, "createNewNet: ");
         File sdcard = new File("/storage/emulated/0/Download");
         // to this path add a new directory path
         File dir = new File(sdcard.getAbsolutePath() + "/osiolek/");
@@ -38,12 +43,14 @@ public class StartupPresenter implements StartupContract.Presenter, ControllerGU
         backend.createNewNet(password, dir, new CreateNewNetCallback() {
             @Override
             public void onCreateNewNetSuccess() {
+                Log.d(TAG, "onCreateNewNetSuccess: ");
                 view.goToCreateNewNetActivity();
 
             }
 
             @Override
             public void onCreateNewNetFailure() {
+                Log.d(TAG, "onCreateNewNetFailure: ");
                 view.showCreateNewNetError();
 
             }

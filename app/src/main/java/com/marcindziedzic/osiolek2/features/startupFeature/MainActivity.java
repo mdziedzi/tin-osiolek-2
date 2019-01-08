@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     };
 
     private void startCreateNewNetActivity() {
-        Intent intent = new Intent(MainActivity.this, CreateNewNetActivity.class);
+        Intent intent = new Intent(this, CreateNewNetActivity.class);
         startActivity(intent);
     }
 
@@ -158,7 +157,8 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     @Override
     public void showCreateNewNetError() {
         Log.i(TAG, "showCreateNewNetError: ");
-        Toast.makeText(this, "Error while creating new net.", Toast.LENGTH_SHORT).show();
+        runOnUiThread(() -> Toast.makeText(this, "Error while creating new net.", Toast
+                .LENGTH_SHORT).show());
     }
 
     @Override
@@ -169,20 +169,20 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     @Override
     public void showConnectToNetRejection() {
         Log.i(TAG, "showConnectToNetRejection: ");
-        Looper.prepare();
-        Toast.makeText(this, "WRONG PASSWORD", Toast.LENGTH_LONG).show();
+        runOnUiThread(() -> Toast.makeText(this, "WRONG PASSWORD", Toast.LENGTH_LONG).show());
     }
 
     @Override
     public void showConnectToNetFailure() {
         Log.e(TAG, "showConnectToNetFailure: ");
-        Toast.makeText(this, "Connect to net FAILURE", Toast.LENGTH_SHORT).show();
+        runOnUiThread(() -> Toast.makeText(this, "Connect to net FAILURE", Toast.LENGTH_SHORT)
+                .show());
     }
 
     @Override
     public void showIpFormatError() {
         Log.i(TAG, "showIpFormatError: ");
-        Toast.makeText(this, "Ip format is bad!", Toast.LENGTH_SHORT).show();
+        runOnUiThread(() -> Toast.makeText(this, "Ip format is bad!", Toast.LENGTH_SHORT).show());
     }
 
     private void showPasswordDialog(PasswordDialogType passwordDialogType) {        // Create an instance of the
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements StartupContract.V
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         // User touched the dialog's positive button
-        System.out.println("positive");
+        Log.d(TAG, "onDialogPositiveClick: ");
         EditText passwordField = Objects.requireNonNull(dialog.getDialog()).findViewById(R.id.password);
 //        Toast.makeText(this, "Pass is set as: " + passwordField.getText().toString(), Toast.LENGTH_SHORT).show();
         presenter.createNewNet(passwordField.getText().toString());

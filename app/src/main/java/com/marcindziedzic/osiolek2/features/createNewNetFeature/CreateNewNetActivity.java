@@ -3,11 +3,13 @@ package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.marcindziedzic.osiolek2.R;
 import com.marcindziedzic.osiolek2.features.showAllRemoteFiles.ShowAllRemoteFilesActivity;
@@ -17,6 +19,8 @@ import com.marcindziedzic.osiolek2.utils.MockFactory;
 import java.util.ArrayList;
 
 public class CreateNewNetActivity extends AppCompatActivity implements CreateNewNetContract.View {
+
+    private static final String TAG = CreateNewNetActivity.class.getSimpleName();
 
     private CreateNewNetContract.Presenter presenter;
 
@@ -73,12 +77,14 @@ public class CreateNewNetActivity extends AppCompatActivity implements CreateNew
 
     @Override
     public void showDisconnectSuccessfully() {
-        //todo
+        Log.d(TAG, "showDisconnectSuccessfully: ");
+        runOnUiThread(() -> Toast.makeText(this, "Disconnected Successfully", Toast.LENGTH_SHORT).show());
     }
 
     @Override
     public void showDisconnectFailure() {
-        //todo
+        Log.d(TAG, "showDisconnectFailure: ");
+        runOnUiThread(() -> Toast.makeText(this, "Disconnect Failure", Toast.LENGTH_SHORT).show());
     }
 
     @Override
