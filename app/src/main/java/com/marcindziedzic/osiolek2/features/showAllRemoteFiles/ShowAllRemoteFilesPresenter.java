@@ -20,11 +20,11 @@ public class ShowAllRemoteFilesPresenter implements ShowAllRemoteFilesContract.P
 
 //        view.showListOfFilesInNet(MockFactory.getMockedListOfFilesInNet());
 
-        backend.getListOfFilesInNet((fileListInfo, owner) -> {
+        backend.getListOfFilesInNet((fileListInfo) -> {
             if (fileListInfo != null) {
                 view.showListOfFilesInNet(
                         fileListInfo.stream()
-                                .map(fileInfo -> new String[]{fileInfo.get(0), fileInfo.get(2), owner})
+                                .map(fileInfo -> new String[]{fileInfo.get(0), fileInfo.get(2), fileInfo.get(3)})
                                 .collect(Collectors.toList())
                 );
             }
