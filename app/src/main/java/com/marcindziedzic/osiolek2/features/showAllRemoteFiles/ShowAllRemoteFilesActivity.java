@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.marcindziedzic.osiolek2.R;
 import com.marcindziedzic.osiolek2.features.createNewNetFeature.CreateNewNetActivity;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAllRemoteFilesActivity extends AppCompatActivity implements ShowAllRemoteFilesContract.View {
+
+    private static final String TAG = ShowAllRemoteFilesActivity.class.getSimpleName();
 
     private ListView listOfAllRemoteFiles;
     private ShowAllRemoteFilesContract.Presenter presenter;
@@ -42,6 +46,7 @@ public class ShowAllRemoteFilesActivity extends AppCompatActivity implements Sho
 
     private void initViews() {
         listOfAllRemoteFiles = findViewById(R.id.listOfAllRemoteFilesListView);
+        listOfAllRemoteFiles.setOnItemClickListener((parent, view, position, id) -> presenter.downloadFile(position));
         refreshButton = findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(v -> presenter.refreshFileList());
 
@@ -61,6 +66,21 @@ public class ShowAllRemoteFilesActivity extends AppCompatActivity implements Sho
                 swipeLayout.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    public void notifyFileDownloaded(String s) {
+        Log.d(TAG, "notifyFileDownloaded: ");
+        runOnUiThread(() -> Toast.makeText(this, s + " has been downloaded", Toast.LENGTH_SHORT)
+                .show());
+    }
+
+    @Override
+    public void onFileNoLongerAviable(String s) {
+        Log.d(TAG, "onFileNoLongerAviable: ");
+        runOnUiThread(() -> Toast.makeText(this, s + " no longer aviable", Toast.LENGTH_SHORT).show
+                ());
+
     }
 
     @Override
