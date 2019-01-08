@@ -90,6 +90,6 @@ public class CreateNewNetActivity extends AppCompatActivity implements CreateNew
     @Override
     public void showUpdatedListOfNodes(ArrayList<String> arrayList) {
         adapter = new ArrayAdapter<>(this, R.layout.ip_list_row, R.id.ipTextView, arrayList);
-        listOfNodes.setAdapter(adapter);
+        runOnUiThread(() -> listOfNodes.setAdapter(adapter));
     }
 }

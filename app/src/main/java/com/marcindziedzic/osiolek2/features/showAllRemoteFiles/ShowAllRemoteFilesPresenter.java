@@ -60,6 +60,11 @@ public class ShowAllRemoteFilesPresenter implements ShowAllRemoteFilesContract.P
             public void onFileNoLongerAvailable(String s) {
                 view.onFileNoLongerAviable(s);
             }
+
+            @Override
+            public void onSavingDownloadingFileError(String s) {
+
+            }
         });
     }
 }
