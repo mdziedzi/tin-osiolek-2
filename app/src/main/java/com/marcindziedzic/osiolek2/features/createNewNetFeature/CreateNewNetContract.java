@@ -15,6 +15,8 @@ public interface CreateNewNetContract {
     interface Presenter {
 
         void disconnectFromNet();
+
+        void refreshListOfNodes();
     }
 
 

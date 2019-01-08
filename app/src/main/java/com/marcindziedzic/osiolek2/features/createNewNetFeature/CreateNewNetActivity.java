@@ -2,6 +2,7 @@ package com.marcindziedzic.osiolek2.features.createNewNetFeature;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +26,7 @@ public class CreateNewNetActivity extends AppCompatActivity implements CreateNew
 
     private ListView listOfNodes;
     private ArrayAdapter<String> adapter;
+    private FloatingActionButton refreshButton;
 
 
     @Override
@@ -39,6 +41,8 @@ public class CreateNewNetActivity extends AppCompatActivity implements CreateNew
 
     private void initViews() {
         listOfNodes = findViewById(R.id.remoteNodesListView);
+        refreshButton = findViewById(R.id.refreshListOfNodesFloatingActionButton);
+        refreshButton.setOnClickListener((c) -> presenter.refreshListOfNodes());
 
     }
 

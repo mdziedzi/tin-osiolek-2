@@ -24,6 +24,11 @@ public class CreateNewNetPresenter implements CreateNewNetContract.Presenter,
         backend.endOfProgram();
     }
 
+    @Override
+    public void refreshListOfNodes() {
+        view.showUpdatedListOfNodes(backend.getListOfNodes());
+    }
+
 
     @Override
     public void onListOfNodesUpdated(ArrayList<String> arrayList) {
